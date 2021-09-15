@@ -3,7 +3,10 @@ import { Product } from '../entities/Product';
 
 interface IProductsRepository {
   create(data: ICreateProduct): Promise<Product>;
-  findByName(name: string): Promise<Product | undefined>;
+  findById(id: string): Promise<Product | undefined>;
+  update(data: ICreateProduct, id: string): Promise<Product>;
+  findAll(): Promise<Product[]>;
+  delete(id: string): Promise<void>;
 }
 
 export { IProductsRepository };
