@@ -10,6 +10,18 @@ class UsersRepository implements IUsersRepository {
   constructor() {
     this.repository = getRepository(User);
   }
+  async updateAvatar(avatar: string, id: string): Promise<void> {
+    try {
+      const user = this.repository.create({
+        id: id,
+        avatar: avatar,
+      });
+
+      await this.repository.save(user);
+    } catch (error) {
+      throw new AppError('failed to created user');
+    }
+  }
 
   async create(data: ICreateUser): Promise<User> {
     try {
