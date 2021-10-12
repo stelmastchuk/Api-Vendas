@@ -3,7 +3,7 @@ import { IUsersRepository } from '@modules/typeorm/IRepositories/IUsersRepositor
 import { inject, injectable } from 'tsyringe';
 
 @injectable()
-class FindByIdUserUseCase {
+class FindAllUserUseCase {
   constructor(
     @inject('UsersRepository')
     private readonly userRepository: IUsersRepository,
@@ -16,4 +16,4 @@ class FindByIdUserUseCase {
   }
 }
 
-export { FindByIdUserUseCase };
+export { FindAllUserUseCase };

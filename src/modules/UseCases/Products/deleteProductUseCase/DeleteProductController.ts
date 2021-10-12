@@ -6,9 +6,9 @@ class DeleteProductController {
   async handler(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 
-    const listProductUseCase = container.resolve(DeleteProductUseCase);
+    const deleteProductUseCase = container.resolve(DeleteProductUseCase);
 
-    await listProductUseCase.execute(id);
+    await deleteProductUseCase.execute(id);
 
     return response.status(200).send();
   }

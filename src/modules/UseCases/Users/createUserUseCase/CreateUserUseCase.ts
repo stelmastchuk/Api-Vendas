@@ -13,13 +13,15 @@ class CreateUserUseCase {
   ) {}
 
   async execute({ name, email, password, avatar }: ICreateUser): Promise<User> {
-    const emailAlreadyExists = await this.userRepository.findByEmail(email);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const emailAlreadyExists = await this.userRepository.findByEmail(email!);
 
     if (emailAlreadyExists) {
       throw new AppError('E-mail Already Exists!');
     }
 
-    const passwordHas = await hash(password, 8);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const passwordHas = await hash(password!, 8);
 
     const user = this.userRepository.create({
       name,
