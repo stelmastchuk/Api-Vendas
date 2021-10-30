@@ -1,4 +1,4 @@
-import { Customer } from '@modules/typeorm/entities/Costumer';
+import { Customer } from '@modules/typeorm/entities/Customer';
 import { ICustomersRepository } from '@modules/typeorm/IRepositories/ICustomersRepository';
 import { inject, injectable } from 'tsyringe';
 

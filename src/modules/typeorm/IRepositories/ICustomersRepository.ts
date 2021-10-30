@@ -1,5 +1,5 @@
 import { ICreateCustomer } from '@modules/DTOs/ICreateCustomer';
-import { Customer } from '../entities/Costumer';
+import { Customer } from '../entities/Customer';
 
 interface ICustomersRepository {
   create(data: ICreateCustomer): Promise<Customer>;

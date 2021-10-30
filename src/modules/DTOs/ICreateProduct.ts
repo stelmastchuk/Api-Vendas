@@ -1,7 +1,7 @@
 interface ICreateProduct {
-  name: string;
-  price: number;
-  quantity: number;
+  name?: string;
+  price?: number;
+  quantity?: number;
 }
 
 export { ICreateProduct };

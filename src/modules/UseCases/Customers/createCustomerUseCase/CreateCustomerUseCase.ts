@@ -2,7 +2,7 @@ import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import { ICustomersRepository } from '@modules/typeorm/IRepositories/ICustomersRepository';
 import { ICreateCustomer } from '@modules/DTOs/ICreateCustomer';
-import { Customer } from '@modules/typeorm/entities/Costumer';
+import { Customer } from '@modules/typeorm/entities/Customer';
 
 @injectable()
 class CreateCustomerUseCase {

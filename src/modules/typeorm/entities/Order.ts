@@ -1,30 +1,29 @@
 import {
-  Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
+import { Customer } from './Customer';
 import { OrdersProducts } from './OrdersProducts';
 
-@Entity('products')
-class Product {
+@Entity('orders')
+class Order {
   @PrimaryColumn()
   id: string;
 
-  @OneToMany(() => OrdersProducts, order_products => order_products.product)
+  @OneToMany(() => OrdersProducts, order_products => order_products.order, {
+    cascade: true,
+  })
   order_products: OrdersProducts[];
 
-  @Column()
-  name: string;
-
-  @Column()
-  price: number;
-
-  @Column()
-  quantity: number;
+  @ManyToOne(() => Customer)
+  @JoinColumn({ name: 'customer_id' })
+  customer: Customer;
 
   @CreateDateColumn()
   created_at: Date;
@@ -39,4 +38,4 @@ class Product {
   }
 }
 
-export { Product };
+export { Order };

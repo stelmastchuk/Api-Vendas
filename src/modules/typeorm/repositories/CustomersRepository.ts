@@ -1,7 +1,7 @@
 import { ICreateCustomer } from '@modules/DTOs/ICreateCustomer';
 import { AppError } from '@shared/errors/AppError';
 import { getRepository, Repository } from 'typeorm';
-import { Customer } from '../entities/Costumer';
+import { Customer } from '../entities/Customer';
 import { ICustomersRepository } from '../IRepositories/ICustomersRepository';
 
 class CustomersRepository implements ICustomersRepository {

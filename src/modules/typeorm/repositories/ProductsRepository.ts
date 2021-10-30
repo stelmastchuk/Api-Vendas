@@ -2,7 +2,10 @@ import { ICreateProduct } from '@modules/DTOs/ICreateProduct';
 import { AppError } from '@shared/errors/AppError';
 import { getRepository, Repository } from 'typeorm';
 import { Product } from '../entities/Product';
-import { IProductsRepository } from '../IRepositories/IProductsRepository';
+import {
+  IFindProducts,
+  IProductsRepository,
+} from '../IRepositories/IProductsRepository';
 
 class ProductsRepository implements IProductsRepository {
   private repository: Repository<Product>;
@@ -27,9 +30,8 @@ class ProductsRepository implements IProductsRepository {
     }
   }
 
-  async findById(id: string): Promise<Product | undefined> {
-    const product = await this.repository.findOne({ id });
-    return product;
+  findById(id: string): Promise<Product | undefined> {
+    return this.repository.findOne({ id });
   }
 
   async update(data: ICreateProduct, id: string): Promise<Product> {
@@ -52,6 +54,12 @@ class ProductsRepository implements IProductsRepository {
     const products = await this.repository.find();
 
     return products;
+  }
+
+  async findAllByIds(products: IFindProducts[]): Promise<Product[]> {
+    const productsIds = products.map(product => product.id);
+    const existsProducts = await this.repository.findByIds(productsIds);
+    return existsProducts;
   }
   async delete(id: string): Promise<void> {
     await this.repository.delete(id);
