@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { UpdateUserUseCase } from './updateUserUseCase';
+import { UpdateUserUseCase } from './UpdateUserUseCase';
+import { classToClass } from 'class-transformer';
 
 class UpdateUserController {
   async handler(request: Request, response: Response): Promise<Response> {
@@ -10,7 +11,7 @@ class UpdateUserController {
 
     const updateUserUseCase = container.resolve(UpdateUserUseCase);
 
-    await updateUserUseCase.execute({
+    const user = await updateUserUseCase.execute({
       user_id,
       name,
       email,
@@ -18,7 +19,7 @@ class UpdateUserController {
       old_password,
     });
 
-    return response.status(201).send();
+    return response.status(201).json(classToClass(user));
   }
 }
 

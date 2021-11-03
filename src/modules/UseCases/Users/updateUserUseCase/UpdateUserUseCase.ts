@@ -1,3 +1,4 @@
+import { User } from '@modules/typeorm/entities/User';
 import { IUsersRepository } from '@modules/typeorm/IRepositories/IUsersRepository';
 import { AppError } from '@shared/errors/AppError';
 import { compare, hash } from 'bcryptjs';
@@ -24,7 +25,7 @@ class UpdateUserUseCase {
     email,
     password,
     old_password,
-  }: IRequest): Promise<void> {
+  }: IRequest): Promise<User> {
     const user = await this.usersRepository.findById(user_id);
 
     if (!user) {
@@ -55,6 +56,8 @@ class UpdateUserUseCase {
     user.email = email;
 
     await this.usersRepository.create(user);
+
+    return user;
   }
 }
 

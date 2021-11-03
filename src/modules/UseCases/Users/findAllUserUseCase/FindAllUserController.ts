@@ -1,3 +1,4 @@
+import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { FindAllUserUseCase } from './FindAllUserUseCase';
@@ -8,7 +9,7 @@ class FindAllUserController {
 
     const users = await findAllUserUseCase.execute();
 
-    return response.status(200).json(users).send();
+    return response.status(200).json(classToClass(users)).send();
   }
 }
 

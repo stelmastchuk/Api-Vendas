@@ -1,5 +1,5 @@
 import { IProductsRepository } from '@modules/typeorm/IRepositories/IProductsRepository';
-import { AppError } from '@shared/errors/AppError';
+import RedisCache from '@shared/cache/RedisCache';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()
@@ -9,9 +9,8 @@ class DeleteProductUseCase {
     private readonly productsRepository: IProductsRepository,
   ) {}
   async execute(id: string): Promise<void> {
-    if (!id) {
-      throw new AppError('Id not existent');
-    }
+    const redisCache = new RedisCache();
+    await redisCache.invalidate('api-vendas-PRODUCTS_LIST');
 
     await this.productsRepository.delete(id);
   }
